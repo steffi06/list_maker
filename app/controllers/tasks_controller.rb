@@ -30,13 +30,13 @@ respond_to :html, :json, :xml
   def update
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
-    redirect_to @task
+    respond_with @task, :location => task_path
   end
 
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to lists_path
+    respond_with @task, :location => lists_path
   end
 
 end

@@ -30,7 +30,7 @@ respond_to :html, :json, :xml
       #   new_task.save
       # end
 
-      redirect_to @list
+      respond_with @list, :location => list_path
     end
 
     def edit
@@ -41,13 +41,13 @@ respond_to :html, :json, :xml
     def update
       @list = List.find(params[:id])
       @list.update_attributes(params[:list])
-      redirect_to @list
+      respond_with @list, :location => list_path
     end
 
     def destroy
       @list = List.find(params[:id])
       @list.destroy
-      redirect_to lists_path
+      respond_with @list, :location => lists_path
     end
 
   end
