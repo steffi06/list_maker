@@ -1,0 +1,12 @@
+<h1>Edit your <%= @list.name %> list:</h1>
+
+<%= form_for(@list) do |f| %>
+
+	<%= f.label :name, "Rename your list:" %>
+	<%= f.text_field :name %>
+	
+	<%= f.submit "Save changes!" %>
+
+<% end %>
+
+<%= link_to "Delete Entire List", @list, method: :delete, data: { confirm: "You sure?" } %>

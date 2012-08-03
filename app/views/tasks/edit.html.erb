@@ -1,0 +1,16 @@
+<h1>Edit your <%= @task.task_name %> list:</h1>
+
+<%= form_for(@task) do |f| %>
+
+	<%= f.label :task_name, "Rename your task:" %>
+	<%= f.text_field :task_name %>
+	<br>
+	<%= f.label :status, "What is the status of this task? 0=not done 1=done" %>
+	<%= f.text_field :status %>
+	<br>
+	<%= f.submit "Save changes!" %>
+
+<% end %>
+
+<br>
+<%= link_to "Delete Task", @task, method: :delete, data: { confirm: "You sure?" } %>

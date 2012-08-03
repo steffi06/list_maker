@@ -1,0 +1,12 @@
+<h1>All the lists you've made:</h1>
+
+<% @lists.each do |list| %>
+	<h2><%= link_to "#{list.name.capitalize}", list_path(list) %></h2>
+
+	<% list.tasks.each do |task| %>
+		<ul><li><%= link_to "#{task.task_name.capitalize}", task_path(task) %></li></ul>
+	<% end%>
+	
+<% end %>
+
+<%= link_to "Create a new list", new_list_path %>

@@ -1,0 +1,6 @@
+<h1><%= @task.task_name.capitalize %></h1>
+
+This task belongs to the <%= link_to "#{List.find(@task.list_id).name.capitalize} List", list_path(@task.list_id) %>
+<br>
+<br>
+<%= link_to "Edit this task", edit_task_path %>

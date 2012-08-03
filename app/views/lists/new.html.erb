@@ -1,0 +1,13 @@
+<h1>Create a new list here!</h1>
+
+<%= form_for(@list) do |f| %>
+
+	<%= f.label :name, "Name your list:" %>
+	<%= f.text_field :name %>
+	
+	<%#=f.label :tasks, "Task separated by semi-colon + space:" %>
+	<%#=f.text_field :tasks %>
+	
+	<%= f.submit "Create List!" %>
+
+<% end %>

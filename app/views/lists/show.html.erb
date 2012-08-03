@@ -1,0 +1,11 @@
+<h1><%= @list.name.capitalize %></h1>
+
+<% @list.tasks.each do |task| %>
+	<ul><li>
+		<%= task.task_name.capitalize %>......................                               
+		<%= link_to "Edit", edit_task_path(task) %>
+	</li></ul>
+<% end%>
+
+<%= link_to "Edit the list", edit_list_path %>
+<%= link_to "Add a task", new_task_path %>
