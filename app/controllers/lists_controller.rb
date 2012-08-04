@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-respond_to :html, :json, :xml
+respond_to :html, :json
 
     def show
       @list = List.find(params[:id])
@@ -30,7 +30,7 @@ respond_to :html, :json, :xml
       #   new_task.save
       # end
 
-      respond_with @list, :location => list_path
+      respond_with @list
     end
 
     def edit
@@ -41,8 +41,26 @@ respond_to :html, :json, :xml
     def update
       @list = List.find(params[:id])
       @list.update_attributes(params[:list])
-      respond_with @list, :location => list_path
+        
+      respond_with do |format|
+        format.html do
+          if @list.save
+            redirect_to task_url(@list)
+          else
+            render 'edit'
+          end
+        end
+
+        format.json do
+          if @list.save
+            render :json => @list
+          else
+            render :json => @list.errors
+          end
+        end
+      end
     end
+    
 
     def destroy
       @list = List.find(params[:id])

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-respond_to :html, :json, :xml
+respond_to :html, :json
 
   def show
     @task = Task.find(params[:id])
@@ -7,7 +7,9 @@ respond_to :html, :json, :xml
   end
   
   def index
-    redirect_to lists_path
+    @tasks = Task.all
+    # where( list_id: params[:list_id] )
+    respond_with(@tasks)
   end
   
   def new
@@ -17,9 +19,27 @@ respond_to :html, :json, :xml
   end
 
   def create
-    @task = Task.new(params[:task])
-    @task.save      
-    redirect_to @task
+    @task = Task.new(params[:task])      
+    
+    # respond_with @task
+    
+    respond_with do |format|
+      format.html do
+        if @task.save
+          redirect_to task_url(@task)
+        else
+          render 'new'
+        end
+      end
+      
+      format.json do
+        if @task.save
+          render :json => @task
+        else
+          render :json => @task.errors
+        end
+      end
+    end
   end
 
   def edit
@@ -30,7 +50,25 @@ respond_to :html, :json, :xml
   def update
     @task = Task.find(params[:id])
     @task.update_attributes(params[:task])
-    respond_with @task, :location => task_path
+    # respond_with @task
+    
+    respond_with do |format|
+      format.html do
+        if @task.save
+          redirect_to task_url(@task)
+        else
+          render 'edit'
+        end
+      end
+      
+      format.json do
+        if @task.save
+          render :json => @task
+        else
+          render :json => @task.errors
+        end
+      end
+    end
   end
 
   def destroy

@@ -1,0 +1,9 @@
+<h1>All the tasks in your lists:</h1>
+<%# lookup_id = (params[:list_id]).to_i %>
+<% @tasks.each do |task|%>
+
+	<li><%= link_to "#{task.task_name}", task_path(task) %></li>
+	
+<% end %>
+
+<%= link_to "Create a new task", new_task_path %>
